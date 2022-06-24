@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="mudar aqui"
-    />
-    <title>Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notes Aggretsuko</title>
+
+    <script defer src="/__/firebase/9.8.4/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/9.8.4/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.8.4/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.8.4/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="message">
+      <h2>Teste de deploy via fire</h2>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'firestore',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
   </body>
 </html>
